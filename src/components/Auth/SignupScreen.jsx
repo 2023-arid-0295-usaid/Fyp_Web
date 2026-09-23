@@ -45,6 +45,8 @@ const dataUrlToFile = async (dataUrl, fileName, type) => {
 
 // Reusable card-styled input
 function Field({ icon, placeholder, value, onChangeText, keyboardType, autoCapitalize, secure, onToggleSecure, multiline, style, iconColor }) {
+  const inputStyle = { ...fieldStyle.input };
+  if (multiline) Object.assign(inputStyle, { height: 64, paddingTop: 12, resize: "none" });
   return (
     <View style={{ ...fieldStyle.container, ...(style || {}) }}>
       <Icon name={icon} size={18} color={iconColor || MUTED} style={{ marginRight: 10 }} />
@@ -54,8 +56,7 @@ function Field({ icon, placeholder, value, onChangeText, keyboardType, autoCapit
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChangeText(e.target.value)}
-          style={{ ...fieldStyle.input, height: 64, paddingTop: 12, resize: "none" }}
-          placeholderStyle={{ color: MUTED }}
+          style={inputStyle}
         />
       ) : (
         <input
@@ -64,9 +65,8 @@ function Field({ icon, placeholder, value, onChangeText, keyboardType, autoCapit
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChangeText(e.target.value)}
-          autoCapitalize={autoCapitalize || "sentences"}
-          style={fieldStyle.input}
-          placeholderStyle={{ color: MUTED }}
+          autoCapitalize={autoCapitalize === "none" ? "none" : "sentences"}
+          style={inputStyle}
         />
       )}
       {onToggleSecure && (

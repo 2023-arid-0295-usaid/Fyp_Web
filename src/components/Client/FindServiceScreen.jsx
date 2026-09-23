@@ -21,6 +21,7 @@ export default function FindServiceScreen() {
   const [workers, setWorkers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [clientName, setClientName] = useState("Client");
+  const [clientPicture, setClientPicture] = useState("");
 
   const [allFilters, setAllFilters] = useState({ gender: "", city: "", categories: [], subSkills: {} });
 
@@ -30,6 +31,9 @@ export default function FindServiceScreen() {
   useEffect(() => {
     storage.getItem("userName").then((n) => {
       if (n) setClientName(n);
+    });
+    storage.getItem("userPicture").then((p) => {
+      if (p) setClientPicture(p);
     });
     fetchCategories();
     // Consume filters handed back from FilterationScreen (sessionStorage is the
@@ -184,7 +188,18 @@ export default function FindServiceScreen() {
             style={{ border: "none", background: "none", cursor: "pointer", borderRadius: 28, padding: 0 }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/default-user.png" alt="profile" style={{ width: 55, height: 55, borderRadius: 28, background: "#EEE", display: "block" }} />
+            <img
+              src={
+                clientPicture && clientPicture.startsWith("/")
+                  ? `${SERVER_BASE}${clientPicture}`
+                  : clientPicture
+                    ? clientPicture
+                    : "/images/default-user.png"
+              }
+              alt="profile"
+              onError={(e) => { e.currentTarget.src = "/images/default-user.png"; }}
+              style={{ width: 55, height: 55, borderRadius: 28, background: "#EEE", display: "block", objectFit: "cover" }}
+            />
           </button>
         </div>
 

@@ -1,0 +1,24 @@
+{
+  "name": "fyp-web",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Next.js web clone of 'Maid & Servant Online' (myFypProject) — mirrors the React Native app against the existing ASP.NET Core Fyp_Backend.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mdi/js": "^7.4.47",
+    "next": "^15.3.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "19.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.3.3"
+  }
+}
